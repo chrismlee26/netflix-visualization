@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Netflix by Country, Dec 2021</title>
+  <style>
+    html {
+      width: 50%;
+      position: fixed;
+      top: 5%;
+      left: 25%;
+      right: 25%;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #333;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0px;
+      overflow: hidden;
+    }
+
+    .sphere {
+      fill: #4242e4;
+    }
+
+    .country {
+      fill: lightgreen;
+      stroke: black;
+      stroke-opacity: 0.1;
+    }
+
+    svg {
+      border: 1px solid;
+    }
+  </style>
+  <script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+</head>
+<body>
+  <h1>Top Netflix Movies by Country Dec 2021</h1>
+  <h2>Project Brief...</h2>
+  <p>
+    Published 10 Dec 2021 - Data Source: <a href="https://www.kaggle.com/dhruvildave/netflix-top-10-tv-shows-and-films">https://www.kaggle.com/dhruvildave/netflix-top-10-tv-shows-and-films</a> 
+  </p>
+  <svg id="worldmap" width="960" height="500"></svg>
+  <!-- <svg id="svg" width="1200" height="700"></svg> -->
+
+  <script src="worldmap.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    async function handleData() {
+      const data = await d3.csv("./data/all-weeks-countries.csv");
+      console.log(data)
+    }
+
+    handleData();
+  </script>
+</body>
+</html>
