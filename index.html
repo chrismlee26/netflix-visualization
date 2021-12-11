@@ -59,15 +59,12 @@
       href="https://www.kaggle.com/dhruvildave/netflix-top-10-tv-shows-and-films">https://www.kaggle.com/dhruvildave/netflix-top-10-tv-shows-and-films</a>
   </p>
   <svg width="960" height="500"></svg>
-  <p>[data from country onClick appears here]</p>
-
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
 
     async function handleData() {
       const data = await d3.csv("./data/all-weeks-countries.csv");
-      // console.log(data)
 
       const svg = d3.select('svg');
 
@@ -90,14 +87,33 @@
           return accumulator;
         }, {});
 
+        const topMovie = data
+          .filter(d => d.week === "2021-12-05")
+          .reduce((accumulator, d) => {
+            if (d.category === "Films" && d.weekly_rank === "1") {
+              accumulator[d.country_name] = d.show_title
+              return accumulator
+            }
+            return accumulator
+          }, {})
+        const topShow = data
+          .filter(d => d.week === "2021-12-05")
+          .reduce((accumulator, d) => {
+            if (d.category === "TV" && d.weekly_rank === "1") {
+              accumulator[d.country_name] = d.show_title
+              return accumulator
+            }
+            return accumulator
+          }, {})
+
         const countries = topojson.feature(topoJSONdata, topoJSONdata.objects.countries);
-        g.selectAll('path').data(countries.features)
+        g.selectAll('path')
+          .data(countries.features)
           .enter().append('path')
           .attr('class', 'country')
           .attr('d', pathGenerator)
           .append('title')
-          .text(d => countryName[d.id]);
-
+          .text((d) => `Country: ${countryName[d.id]}\nMovie: ${topMovie[countryName[d.id]] || "N/A"}\nTV Show: ${topShow[countryName[d.id]] || "N/A"}`);
       });
     }
 
