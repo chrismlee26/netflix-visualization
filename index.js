@@ -4,7 +4,6 @@ import {
   tsv,
   geoPath,
   geoNaturalEarth1,
-  zoom,
   event
 } from 'd3';
 import { feature } from 'topojson';
