@@ -36,6 +36,9 @@
       stroke: black;
       stroke-opacity: 0.1;
     }
+    .country:hover {
+      fill: lightblue;
+    }
 
     svg {
       border: 1px solid;
@@ -43,6 +46,7 @@
   </style>
   <script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
   <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+  <script src="./index.js"></script>
 </head>
 <body>
   <h1>Top Netflix Movies by Country Dec 2021</h1>
@@ -50,11 +54,13 @@
   <p>
     Published 10 Dec 2021 - Data Source: <a href="https://www.kaggle.com/dhruvildave/netflix-top-10-tv-shows-and-films">https://www.kaggle.com/dhruvildave/netflix-top-10-tv-shows-and-films</a> 
   </p>
-  <svg id="worldmap" width="960" height="500"></svg>
-  <!-- <svg id="svg" width="1200" height="700"></svg> -->
+  <svg width="960" height="500"></svg>
+  <p>[data from country onClick appears here]</p>
 
-  <script src="worldmap.js"></script>
+  <script src="./bundle.js"></script>
+  
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  
   <script>
     async function handleData() {
       const data = await d3.csv("./data/all-weeks-countries.csv");
